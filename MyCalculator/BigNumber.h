@@ -41,6 +41,8 @@ public:
 	//移动该数字的小数点
 	//direction 0为左，1为右，place表示移动几位
 	void move_dot(bool direction, unsigned int place);
+	//返回转换成的整数
+	long long  get_int() const;
 
 	///----友元函数----
 
@@ -52,6 +54,8 @@ public:
 	friend BigNumber minus_abs(const BigNumber &num1, const BigNumber &num2);
 	//返回两数的整除
 	friend BigNumber divide_exactly(const BigNumber &num1, const BigNumber &num2);
+	//返回两数的取余
+	friend BigNumber rem_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之和
 	friend BigNumber add_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之差
@@ -59,11 +63,12 @@ public:
 	//返回两数之积
 	friend BigNumber multiply_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之商，precision是保留的小数位数
-	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision);//奇怪的问题：提示 友元函数无法向以前的声明添加默认参数，但是可以过编译可以正常运行
-	//返回两数之商，保留PRECISION位小数
-	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2);
+	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision);
 	//返回数的阶乘
-	friend BigNumber factorial_num(BigNumber num);
+	friend BigNumber factorial_num(const BigNumber &num);
+	//返回数的整数次幂，base是底数，index是指数
+	//index必须为整数,且index会被转化成long long
+	friend BigNumber pow_int_index(const BigNumber &base, const BigNumber &index);
 
 	///----运算符重载----
 
@@ -87,8 +92,12 @@ public:
 	friend BigNumber operator+ (const BigNumber &num1, const BigNumber &num2);
 	//运算符重载：相减-
 	friend BigNumber operator- (const BigNumber &num1, const BigNumber &num2);
-	//运算符重载：相乘*(保留10位小数)
+	//运算符重载：相乘*(保留PRECISION位小数)
 	friend BigNumber operator* (const BigNumber &num1, const BigNumber &num2);
+	//运算符重载：相除/(保留PRECISION位小数)
+	friend BigNumber operator/ (const BigNumber &num1, const BigNumber &num2);
+	//运算符重载：取余%
+	friend BigNumber operator% (const BigNumber &num1, const BigNumber &num2);
 
 private:
 	vector<int> integer;//整数部分，逆序
@@ -97,3 +106,5 @@ private:
 	int dec_len;//小数位数
 	char pos;//'+'表示整数，'-'表示负数，'0'表示0
 };
+
+BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision = PRECISION);

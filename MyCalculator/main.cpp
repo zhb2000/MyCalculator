@@ -9,9 +9,9 @@ using namespace std;
 
 int main()
 {
-	BigNumber num1("0.94532252");
-	BigNumber num2("-0.12345");
-	BigNumber num3 = divide_num(num1, num2);
-	cout << num3;
+	cout << "Press any key to start.";
+	getchar();
+	BigNumber num1(2);
+	cout << pow_int_index(num1, -2);
 	return 0;
 }

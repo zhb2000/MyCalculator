@@ -281,6 +281,26 @@ void BigNumber::move_dot(bool direction, unsigned int place)
 	this->clean_zero();//清除0，重新计算长度
 }
 
+//返回转换成的整数
+long long BigNumber::get_int() const
+{
+	if (int_len == 0)
+		return 0;
+	else
+	{
+		int result = 0;
+		int base = 1;
+		for (int i = 0; i < int_len; i++)
+		{
+			result += integer[i] * base;
+			base *= 10;
+		}
+		if (pos == '-')
+			result = -result;
+		return result;
+	}
+}
+
 ///----友元函数----
 
 //比较两个数的绝对值，num1大返回1，num2大返回-1，相等返回0
@@ -477,6 +497,12 @@ BigNumber divide_exactly(const BigNumber & num1, const BigNumber & num2)
 	}
 }
 
+//返回两数的取余
+BigNumber rem_num(const BigNumber & num1, const BigNumber & num2)
+{
+	return (num1 - multiply_num(divide_exactly(num1, num2), num2));
+}
+
 //返回两数之和
 BigNumber add_num(const BigNumber & num1, const BigNumber & num2)
 {
@@ -608,13 +634,8 @@ BigNumber divide_num(const BigNumber & num1, const BigNumber & num2, int precisi
 	return result;
 }
 
-//返回两数之商，保留PRECISION位小数
-BigNumber divide_num(const BigNumber & num1, const BigNumber & num2)
-{
-	return divide_num(num1, num2, PRECISION);
-}
 //返回数的阶乘
-BigNumber factorial_num(BigNumber num)
+BigNumber factorial_num(const BigNumber &num)
 {
 	if (num == 0)
 		return BigNumber(0);
@@ -629,6 +650,36 @@ BigNumber factorial_num(BigNumber num)
 		}
 		return result;
 	}	
+}
+
+//返回数的整数次幂，base是底数，index是指数
+//index必须为整数
+BigNumber pow_int_index(const BigNumber &base, const BigNumber &index)
+{
+	if (base == 0)
+		return BigNumber(0);
+	if (index == 0)
+		return BigNumber(1);
+	else if (index < 0)
+	{
+		BigNumber index2 = index;
+		index2.set_opposite();
+		return (1 / pow_int_index(base, index2));
+	}
+	else
+	{
+		BigNumber result("1");
+		BigNumber base2 = base;
+		long long index2 = index.get_int();
+		while (index2 != 0)
+		{
+			if (index2 % 2)//index2为奇数
+				result = result * base2;
+			base2 = base2 * base2;
+			index2 = index2 / 2;
+		}
+		return result;
+	}
 }
 
 ///----运算符重载----
@@ -765,10 +816,22 @@ BigNumber operator-(const BigNumber & num1, const BigNumber & num2)
 	return minus_num(num1, num2);
 }
 
-//运算符重载：相乘*(保留10位小数)
+//运算符重载：相乘*(保留PRECISION位小数)
 BigNumber operator*(const BigNumber & num1, const BigNumber & num2)
 {
 	BigNumber result = multiply_num(num1, num2);
 	result.accuracy(PRECISION);
 	return result;
+}
+
+//运算符重载：相除/(保留PRECISION位小数)
+BigNumber operator/(const BigNumber & num1, const BigNumber & num2)
+{
+	return divide_num(num1, num2, PRECISION);
+}
+
+//运算符重载：取余%
+BigNumber operator%(const BigNumber & num1, const BigNumber & num2)
+{
+	return rem_num(num1, num2);
 }
