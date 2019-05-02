@@ -2,16 +2,15 @@
 //
 
 #include "pch.h"
-//#include <iostream>
 #include "BigNumber.h"
+#include "Fraction.h"
 
 using namespace std;
 
 int main()
 {
-	cout << "Press any key to start.";
-	getchar();
-	BigNumber num1("10000");
-	cout << factorial_num(num1);
+	Fraction a(1, -5);
+	Fraction b(3, 6);
+	cout << a + b;
 	return 0;
 }
