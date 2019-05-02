@@ -9,8 +9,9 @@ using namespace std;
 
 int main()
 {
-	getchar();
-	BigNumber num2 = factorial_num(BigNumber("1000"));
-	cout << num2;
+	BigNumber num1("0.94532252");
+	BigNumber num2("-0.12345");
+	BigNumber num3 = divide_num(num1, num2);
+	cout << num3;
 	return 0;
 }

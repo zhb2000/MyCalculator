@@ -13,7 +13,7 @@ using namespace std;
 static const int PRECISION = 10;//保留的小数位
 //static const int BASE = 100000000;
 
-//高精度大数类型
+//高精度实数类型
 class BigNumber
 {
 public:
@@ -50,12 +50,18 @@ public:
 	friend BigNumber add_abs(const BigNumber &num1, const BigNumber &num2);
 	//返回两数绝对值之差（结果非负）
 	friend BigNumber minus_abs(const BigNumber &num1, const BigNumber &num2);
+	//返回两数的整除
+	friend BigNumber divide_exactly(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之和
 	friend BigNumber add_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之差
 	friend BigNumber minus_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之积
 	friend BigNumber multiply_num(const BigNumber &num1, const BigNumber &num2);
+	//返回两数之商，precision是保留的小数位数
+	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision);//奇怪的问题：提示 友元函数无法向以前的声明添加默认参数，但是可以过编译可以正常运行
+	//返回两数之商，保留PRECISION位小数
+	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2);
 	//返回数的阶乘
 	friend BigNumber factorial_num(BigNumber num);
 

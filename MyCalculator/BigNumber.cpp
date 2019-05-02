@@ -224,6 +224,9 @@ void BigNumber::move_dot(bool direction, unsigned int place)
 {
 	vector<int> temp_int;//临时的整数部分
 	vector<int> temp_dec;//临时的小数部分
+	//不用移
+	if (place == 0)
+		return;
 	//左移
 	if (direction == 0)
 	{
@@ -417,6 +420,63 @@ BigNumber minus_abs(const BigNumber & num1, const BigNumber & num2)
 	return num11;
 }
 
+//返回两数的整除
+BigNumber divide_exactly(const BigNumber & num1, const BigNumber & num2)
+{
+	if (num1 == 0)
+		return BigNumber(0);
+	else if (num2 == 0)//非法表达式
+		return BigNumber();
+	else
+	{
+		BigNumber num11 = num1;
+		BigNumber num22 = num2;
+		if (num11 < 0)
+			num11.set_opposite();//保证num11为正数
+		if (num22 < 0)
+			num22.set_opposite();//保证num22为正数
+		BigNumber num22_init = num22;//记住原来的num22
+		vector<BigNumber> times_array;//记录每个数减了多少次
+		int i = 0;//计数变量
+		//除法开始
+		while (num11 >= num22)//够减
+		{
+			num11 = num11 - num22;
+			num22.move_dot(1, 1);//乘10
+			times_array.push_back(1);
+			i++;
+		}
+		while (num11 >= num22_init)//若小于则表明除法结束
+		{
+			if (num11 >= num22)//够减
+			{
+				num11 = num11 - num22;
+				times_array[i] = times_array[i] + 1;
+			}
+			else //不够减
+			{
+				num22.move_dot(0, 1);//左移
+				i--;
+			}
+		}
+		BigNumber result(0);//结果
+		for (unsigned int i = 0; i < times_array.size(); i++)
+		{
+			BigNumber temp(1);//临时变量
+			temp.move_dot(1, i);
+			result = result + temp * times_array[i];
+		}
+		//确定符号
+		if (result == 0)//整除出的结果是0
+			result.pos = '0';
+		else if (num1.pos == num2.pos)//两数同号
+			result.pos = '+';
+		else//两数异号
+			result.pos = '-';
+		return result;
+	}
+}
+
 //返回两数之和
 BigNumber add_num(const BigNumber & num1, const BigNumber & num2)
 {
@@ -535,6 +595,24 @@ BigNumber multiply_num(const BigNumber & num1, const BigNumber & num2)
 	}//else
 }
 
+//返回两数之商，precision是保留的小数位数
+BigNumber divide_num(const BigNumber & num1, const BigNumber & num2, int precision)
+{
+	BigNumber num11 = num1;//用于运算的临时变量
+	BigNumber num22 = num2;//用于运算的临时变量
+	num22.move_dot(1, num2.dec_len);//把num22变成整数
+	num11.move_dot(1, num2.dec_len + precision + 1);
+	BigNumber result = divide_exactly(num11, num22);
+	result.move_dot(0, precision + 1);//此时result的小数位数为precision + 1
+	result.accuracy(precision);
+	return result;
+}
+
+//返回两数之商，保留PRECISION位小数
+BigNumber divide_num(const BigNumber & num1, const BigNumber & num2)
+{
+	return divide_num(num1, num2, PRECISION);
+}
 //返回数的阶乘
 BigNumber factorial_num(BigNumber num)
 {
@@ -619,9 +697,13 @@ bool operator>(const BigNumber & num1, const BigNumber & num2)
 	//两数异号
 	if (num1.pos == '+' && num2.pos == '0')
 		return true;
+	else if (num1.pos == '+' && num2.pos == '-')
+		return true;
 	else if (num1.pos == '0' && num2.pos == '-')
 		return true;
 	else if (num1.pos == '-' && num2.pos == '0')
+		return false;
+	else if (num1.pos == '-' && num2.pos == '+')
 		return false;
 	else if (num1.pos == '0' && num2.pos == '+')
 		return false;
@@ -642,7 +724,7 @@ bool operator>(const BigNumber & num1, const BigNumber & num2)
 			else
 				return false;
 		}
-		else//为0
+		else//都为0
 			return false;
 	}
 }
