@@ -21,6 +21,9 @@
     <ClInclude Include="BigNumber.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Fraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

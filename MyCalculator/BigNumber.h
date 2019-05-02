@@ -43,9 +43,13 @@ public:
 	void move_dot(bool direction, unsigned int place);
 	//返回转换成的整数
 	long long  get_int() const;
+	//返回转换成的实数
+	long double get_real() const;
 
 	///----友元函数----
 
+	//返回绝对值
+	friend BigNumber abs(const BigNumber &num);
 	//比较两个数的绝对值，num1大返回1，num2大返回-1，相等返回0
 	friend int cmp_abs(const BigNumber &num1, const BigNumber &num2);
 	//返回两数绝对值之和
@@ -69,6 +73,9 @@ public:
 	//返回数的整数次幂，base是底数，index是指数
 	//index必须为整数,且index会被转化成long long
 	friend BigNumber pow_int_index(const BigNumber &base, const BigNumber &index);
+	//返回数的整数次开根
+	//degree必须为整数,且degree会被转化成int
+	friend BigNumber nth_root_int(const BigNumber &radicand, const BigNumber &degree);
 
 	///----运算符重载----
 
@@ -98,6 +105,22 @@ public:
 	friend BigNumber operator/ (const BigNumber &num1, const BigNumber &num2);
 	//运算符重载：取余%
 	friend BigNumber operator% (const BigNumber &num1, const BigNumber &num2);
+	//运算符重载：取相反数-
+	void operator- ();
+	//运算符重载：前置++
+	BigNumber& operator++ ();
+	//运算符重载：后置++
+	BigNumber operator++ (int);
+	//运算符重载：+=
+	BigNumber& operator+= (const BigNumber &num);
+	//运算符重载：-=
+	BigNumber& operator-= (const BigNumber &num);
+	//运算符重载：*=
+	BigNumber& operator*= (const BigNumber &num);
+	//运算符重载：/= 做除法而不是整除
+	BigNumber& operator/= (const BigNumber &num);
+	//运算符重载：%=
+	BigNumber& operator%= (const BigNumber &num);
 
 private:
 	vector<int> integer;//整数部分，逆序

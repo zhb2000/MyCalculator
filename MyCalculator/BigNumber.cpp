@@ -301,7 +301,36 @@ long long BigNumber::get_int() const
 	}
 }
 
+//返回转换成的实数
+long double BigNumber::get_real() const
+{
+	if (this->pos == '0')
+		return 0;
+	else
+	{
+		long double result = abs(this->get_int());
+		long double base = 0.1;
+		for (int i = 0; i < dec_len; i++)
+		{
+			result += decimal[i] * base;
+			base /= 10;
+		}
+		if (pos == '-')
+			result = -result;
+		return result;
+	}
+}
+
 ///----友元函数----
+
+//返回绝对值
+BigNumber abs(const BigNumber & num)
+{
+	BigNumber result = num;
+	if (result.pos == '-')
+		result.pos = '+';
+	return result;
+}
 
 //比较两个数的绝对值，num1大返回1，num2大返回-1，相等返回0
 int cmp_abs(const BigNumber &num1, const BigNumber &num2)
@@ -656,14 +685,14 @@ BigNumber factorial_num(const BigNumber &num)
 //index必须为整数
 BigNumber pow_int_index(const BigNumber &base, const BigNumber &index)
 {
-	if (base == 0)
+	if (base.pos == '0')
 		return BigNumber(0);
-	if (index == 0)
+	if (index.pos == '0')
 		return BigNumber(1);
-	else if (index < 0)
+	else if (index.pos == '-')
 	{
 		BigNumber index2 = index;
-		index2.set_opposite();
+		index2.pos = '+';
 		return (1 / pow_int_index(base, index2));
 	}
 	else
@@ -673,13 +702,33 @@ BigNumber pow_int_index(const BigNumber &base, const BigNumber &index)
 		long long index2 = index.get_int();
 		while (index2 != 0)
 		{
-			if (index2 % 2)//index2为奇数
+			if (index2 & 1)//index2为奇数
 				result = result * base2;
 			base2 = base2 * base2;
 			index2 = index2 / 2;
 		}
 		return result;
 	}
+}
+
+//返回数的整数次开根
+//degree必须为整数,且degree会被转化成int
+BigNumber nth_root_int(const BigNumber & radicand, const BigNumber & degree)
+{
+	BigNumber small(1);
+	small.move_dot(0, 7);//设成10会变慢？2开1000次方
+	BigNumber radicand2 = radicand;//用于运算的临时变量
+	int degree2 = degree.get_int();//用于运算的临时变量
+	BigNumber x0, x1;
+	x0 = radicand2 / 2;//取radicand2 / 2作为radicand2的初值
+	x1 = x0 - x0 * (1 - radicand2 * pow_int_index(x0, -degree2)) / degree2;
+	do 
+	{
+		x0 = x1;
+		x1 = x0 - x0 * (1 - radicand2 * pow_int_index(x0, -degree2)) / degree2;
+	} while (abs(x0 - x1) >= small);
+	x0.accuracy(6);
+	return x0;
 }
 
 ///----运算符重载----
@@ -834,4 +883,55 @@ BigNumber operator/(const BigNumber & num1, const BigNumber & num2)
 BigNumber operator%(const BigNumber & num1, const BigNumber & num2)
 {
 	return rem_num(num1, num2);
+}
+
+//运算符重载：取相反数-
+void BigNumber::operator-()
+{
+	this->set_opposite();
+}
+
+//运算符重载：前置++
+BigNumber& BigNumber::operator++()
+{
+	*this = (*this) + 1;
+	return *this;
+}
+//运算符重载：后置++
+BigNumber BigNumber::operator++(int)
+{
+	BigNumber old = *this;
+	++(*this);
+	return old;
+}
+
+//运算符重载：+=
+BigNumber & BigNumber::operator+=(const BigNumber & num)
+{
+	*this = *this + num;
+	return *this;
+}
+//运算符重载：-=
+BigNumber & BigNumber::operator-=(const BigNumber & num)
+{
+	*this = *this - num;
+	return *this;
+}
+//运算符重载：*=
+BigNumber & BigNumber::operator*=(const BigNumber & num)
+{
+	*this = *this * num;
+	return *this;
+}
+//运算符重载：/= 做除法而不是整除
+BigNumber & BigNumber::operator/=(const BigNumber & num)
+{
+	*this = *this / num;
+	return *this;
+}
+//运算符重载：%=
+BigNumber & BigNumber::operator%=(const BigNumber & num)
+{
+	*this = *this % num;
+	return *this;
 }
