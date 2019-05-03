@@ -1,3 +1,4 @@
+//分数
 #include "pch.h"
 #include "Fraction.h"
 
@@ -6,7 +7,7 @@
 Fraction::Fraction()
 {
 	numerator = 0;
-	denominator = 0;
+	denominator = 1;
 }
 
 Fraction::Fraction(int num)
@@ -29,7 +30,7 @@ Fraction::Fraction(int a, int b)
 		numerator = -abs(a);
 		denominator = abs(b);
 	}
-	this->simplify();
+	this->simplify();//约分化简
 }
 
 ///----成员函数----
@@ -101,31 +102,122 @@ istream& operator>> (istream &in, Fraction &fract)
 	fract = Fraction(num);
 	return in;
 }
-
+//运算符重载：相加+
 Fraction operator+(Fraction fract1, Fraction fract2)
 {
 	return add_fract(fract1, fract2);
 }
-
+//运算符重载：相减-
 Fraction operator-(Fraction fract1, Fraction fract2)
 {
 	return minus_fract(fract1, fract2);
 }
-
+//运算符重载：相乘*
 Fraction operator*(Fraction fract1, Fraction fract2)
 {
 	return multiply_fract(fract1, fract2);
 }
-
+//运算符重载：相除/
 Fraction operator/(Fraction fract1, Fraction fract2)
 {
 	return divide_fract(fract1, fract2);
 }
-
-void Fraction::operator-()
+//运算符重载：取相反数-
+Fraction Fraction::operator-() const
 {
-	numerator = -numerator;
+	Fraction temp = *this;
+	temp.numerator = -temp.numerator;
+	return temp;
 }
+//运算符重载：前置++
+Fraction & Fraction::operator++()
+{
+	*this = (*this) + 1;
+	return *this;
+}
+//运算符重载：后置++
+Fraction Fraction::operator++(int)
+{
+	Fraction old = *this;
+	++(*this);
+	return old;
+}
+//运算符重载：+=
+Fraction & Fraction::operator+=(const Fraction & fract)
+{
+	*this = *this + fract;
+	return *this;
+}
+//运算符重载：-=
+Fraction & Fraction::operator-=(const Fraction & fract)
+{
+	*this = *this - fract;
+	return *this;
+}
+//运算符重载：*=
+Fraction & Fraction::operator*=(const Fraction & fract)
+{
+	*this = (*this) * fract;
+	return *this;
+}
+//运算符重载：/=
+Fraction & Fraction::operator/=(const Fraction & fract)
+{
+	*this = *this / fract;
+	return *this;
+}
+
+//运算符重载 ==
+bool operator==(const Fraction & fract1, const Fraction & fract2)
+{
+	Fraction temp = fract1 - fract2;
+	if (temp.numerator == 0)
+		return true;
+	else
+		return false;
+}
+//运算符重载 !=
+bool operator!=(const Fraction & fract1, const Fraction & fract2)
+{
+	if (!(fract1 == fract2))
+		return true;
+	else
+		return false;
+}
+//运算符重载 >
+bool operator>(const Fraction & fract1, const Fraction & fract2)
+{
+	Fraction temp = fract1 - fract2;
+	if (temp.numerator > 0)
+		return true;
+	else
+		return false;
+}
+//运算符重载 >=
+bool operator>=(const Fraction & fract1, const Fraction & fract2)
+{
+	if (fract1 > fract2 || fract1 == fract2)
+		return true;
+	else
+		return false;
+}
+//运算符重载 <
+bool operator<(const Fraction & fract1, const Fraction & fract2)
+{
+	if (!(fract1 >= fract2))
+		return true;
+	else
+		return false;
+}
+//运算符重载 <=
+bool operator<=(const Fraction & fract1, const Fraction & fract2)
+{
+	if (!(fract1 > fract2))
+		return true;
+	else
+		return false;
+}
+
 
 ///----其他函数----
 

@@ -27,15 +27,26 @@ public:
 
 	///----运算符重载----
 
-	//运算符重载：输出流
 	friend ostream& operator<< (ostream &out, const Fraction &num);
-	//运算符重载：输入流
 	friend istream& operator>> (istream &in, Fraction &num);
 	friend Fraction operator+ (Fraction fract1, Fraction fract2);
 	friend Fraction operator- (Fraction fract1, Fraction fract2);
 	friend Fraction operator* (Fraction fract1, Fraction fract2);
 	friend Fraction operator/ (Fraction fract1, Fraction fract2);
-	void operator- ();
+	Fraction operator- () const;
+	Fraction& operator++ ();
+	Fraction operator++ (int);
+	Fraction& operator+= (const Fraction &fract);
+	Fraction& operator-= (const Fraction &fract);
+	Fraction& operator*= (const Fraction &fract);
+	Fraction& operator/= (const Fraction &fract);
+	friend bool operator== (const Fraction &fract1, const Fraction &fract2);
+	friend bool operator!= (const Fraction &fract1, const Fraction &fract2);
+	friend bool operator> (const Fraction &fract1, const Fraction &fract2);
+	friend bool operator>= (const Fraction &fract1, const Fraction &fract2);
+	friend bool operator< (const Fraction &fract1, const Fraction &fract2);
+	friend bool operator<= (const Fraction &fract1, const Fraction &fract2);
+
 
 private:
 	int numerator;//分子

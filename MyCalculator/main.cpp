@@ -4,13 +4,19 @@
 #include "pch.h"
 #include "BigNumber.h"
 #include "Fraction.h"
+#include "Equation.h"
 
 using namespace std;
 
 int main()
 {
-	Fraction a(1, -5);
-	Fraction b(3, 6);
-	cout << a + b;
+	cout << "输入增广矩阵的行数,列数" << endl;
+	int m, n;
+	cin >> m >> n;
+	Equation e = scan_matrix(m, n);
+	cout << endl;
+	e.solve();
+	cout << endl;
+	e.print_matrix();
 	return 0;
 }

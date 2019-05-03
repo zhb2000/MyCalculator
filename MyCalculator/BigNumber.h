@@ -106,7 +106,7 @@ public:
 	//运算符重载：取余%
 	friend BigNumber operator% (const BigNumber &num1, const BigNumber &num2);
 	//运算符重载：取相反数-
-	void operator- ();
+	BigNumber operator- () const;
 	//运算符重载：前置++
 	BigNumber& operator++ ();
 	//运算符重载：后置++

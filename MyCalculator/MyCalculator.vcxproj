@@ -86,7 +86,7 @@
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -94,7 +94,7 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,11 +156,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BigNumber.h" />
+    <ClInclude Include="Equation.h" />
     <ClInclude Include="Fraction.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigNumber.cpp" />
+    <ClCompile Include="Equatation.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">

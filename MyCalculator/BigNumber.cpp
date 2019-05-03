@@ -886,9 +886,11 @@ BigNumber operator%(const BigNumber & num1, const BigNumber & num2)
 }
 
 //运算符重载：取相反数-
-void BigNumber::operator-()
+BigNumber BigNumber::operator-() const
 {
-	this->set_opposite();
+	BigNumber temp = *this;
+	temp.set_opposite();
+	return temp;
 }
 
 //运算符重载：前置++
