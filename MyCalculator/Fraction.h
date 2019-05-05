@@ -2,6 +2,10 @@
 //分数
 #include <iostream>
 #include <cmath>
+#include <string>//怎么没有也行？
+#include <iterator>
+#include <iomanip>
+#include <sstream>
 using namespace std;
 
 class Fraction
@@ -12,6 +16,9 @@ public:
 	Fraction();
 	Fraction(int num);
 	Fraction(int a, int b);
+	Fraction(string s);
+	Fraction(const char *char_s);
+	Fraction(double num);
 
 	///----成员函数----
 

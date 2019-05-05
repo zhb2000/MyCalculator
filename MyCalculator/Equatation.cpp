@@ -74,6 +74,8 @@ void Equation::trans_to_stair()
 	int k = 0;
 	for (int now_col = 0; now_col < cols - 1; now_col++)
 	{
+		if (k > rows - 1)
+			break;
 		if(this->col_i_k_th(now_col, k) != 0)
 			k++;
 	}

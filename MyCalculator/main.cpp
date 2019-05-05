@@ -10,13 +10,15 @@ using namespace std;
 
 int main()
 {
-	cout << "输入增广矩阵的行数,列数" << endl;
+	/*cout << "输入增广矩阵的行数,列数" << endl;
 	int m, n;
 	cin >> m >> n;
 	Equation e = scan_matrix(m, n);
 	cout << endl;
 	e.solve();
 	cout << endl;
-	e.print_matrix();
+	e.print_matrix();*/
+	Fraction f(0.33333);
+	cout << f;
 	return 0;
 }
