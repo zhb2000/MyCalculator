@@ -27,6 +27,9 @@
     <ClInclude Include="Equation.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LogicalExpression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -42,6 +45,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Equatation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalExpression.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

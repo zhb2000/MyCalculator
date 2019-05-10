@@ -80,7 +80,7 @@ Fraction::Fraction(string s)
 		}
 		size_t i = start;//两个循环都要用到，要记住位置
 		//太丑了，以后重写
-		for (; i < s.size(); i++)//计算分子的数字
+		for (; i < s.size(); i++)//计算整数的数字
 		{
 			if (s[i] == '.')
 				break;//break后i并不会自增
@@ -90,7 +90,7 @@ Fraction::Fraction(string s)
 		i++;
 		Fraction fract = 0;//分母的数字
 		Fraction base(1, 10);
-		for (; i < s.size(); i++)//计算分母的数字
+		for (; i < s.size(); i++)//计算小数的数字
 		{
 			fract += (s[i] - '0') * base;
 			base /= 10;
@@ -206,10 +206,10 @@ ostream& operator<< (ostream &out, const Fraction &num)
 //运算符重载：输入流
 istream& operator>> (istream &in, Fraction &fract)
 {
-	int num;
-	if (!(in >> num))
+	string str;
+	if (!(in >> str))
 		return in;
-	fract = Fraction(num);
+	fract = Fraction(str);
 	return in;
 }
 //运算符重载：相加+

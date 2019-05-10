@@ -311,6 +311,7 @@ Status Equation::solve_inhomo(vector<elem> &ans_te, VectorGroup &ans_tong) const
 	}
 }
 
+//求解并打印
 void Equation::solve()
 {
 	this->trans_to_stair();
@@ -318,24 +319,39 @@ void Equation::solve()
 	if (this->type == homo)//齐次
 	{
 		VectorGroup ans;
-		if(this->solve_homo(ans) == 1)
+		if(this->solve_homo(ans) == 1)//有无穷多解
 		{
 			cout << "该齐次方程组有无穷多解" << endl;
-			cout << "它的一个基础解系为：" << endl;
-			int size = ans.size();
-			int num = ans[0].size();
+			cout << "它的一个通解为：" << endl;
+			cout << "X = ";
+			int size = ans.size();//解向量的个数
+			int num = ans[0].size();//一个解向量中元素的个数
 			for (int i = 0; i < size; i++)
 			{
+				cout << "k" << i + 1 << "(";
 				for (int j = 0; j < num; j++)
 				{
-					cout << ans[i][j] << " ";
+					cout << ans[i][j];
+					if (j < num - 1)
+						cout << ", ";
 				}
-				cout << endl;
+				cout << ")";
+				if (i < size - 1)
+					cout << " + ";
 			}
+			cout << endl;
 		}
-		else
+		else//只有零解
 		{
 			cout << "该齐次方程组只有零解" << endl;
+			cout << "X = (";
+			for (size_t i = 0; i < ans[0].size(); i++)
+			{
+				cout << "0";
+				if (i < ans[0].size() - 1)
+					cout << ", ";
+			}
+			cout << ")" << endl;
 		}
 	}
 	else//非齐次
@@ -348,34 +364,45 @@ void Equation::solve()
 		else if (status == 0)
 		{
 			cout << "该非齐次方程组有唯一解" << endl;
+			cout << "X = (";
 			int num = ans_te.size();
 			for (int i = 0; i < num; i++)
 			{
-				cout << ans_te[i] << " ";
+				cout << ans_te[i];
+				if (i < num - 1)
+					cout << ", ";
 			}
-			cout << endl;
+			cout << ")" << endl;
 		}
 		else
 		{
 			cout << "该非齐次方程组有无穷多解" << endl;
-			cout << "特" << endl;
-			int num = ans_te.size();
+			cout << "它的一个通解为：" << endl;
+			cout << "X = (";
+			int num = ans_te.size();//特解的解向量元素个数
 			for (int i = 0; i < num; i++)
 			{
-				cout << ans_te[i] << " ";
+				cout << ans_te[i];
+				if (i < num - 1)
+					cout << ", ";
 			}
-			cout << endl;
-			cout << "基" << endl;
-			int size = ans_tong.size();
-			int num2 = ans_tong[0].size();
+			cout << ") + ";
+			int size = ans_tong.size();//导出组基解组的解向量个数
+			int num2 = ans_tong[0].size();//基解组解向量元素个数
 			for (int i = 0; i < size; i++)
 			{
+				cout << "k" << i + 1 << "(";
 				for (int j = 0; j < num2; j++)
 				{
-					cout << ans_tong[i][j] << " ";
+					cout << ans_tong[i][j];
+					if (j < num2 - 1)
+						cout << ", ";
 				}
-				cout << endl;
+				cout << ")";
+				if (i < size - 1)
+					cout << " + ";
 			}
+			cout << endl;
 		}
 	}
 }
@@ -401,4 +428,69 @@ Equation scan_matrix(int m, int n)
 	}
 	e.type = homo;//齐次
 	return e;
+}
+
+//进入求解线性方程组模式
+void equation_mode()
+{
+	while (true)
+	{
+		cout << "输入start即可开始，输入quit退出求解线性方程组模式" << endl;
+		cout << "[输入指令]";
+		string str;
+		cin >> str;
+		if (str == "start")
+		{
+			cout << endl;
+			equation_start();
+		}
+		else if (str == "quit")
+		{
+			cout << "已退出求解线性方程组模式" << endl << endl;
+			return;
+		}
+		else
+		{
+			cout << "无法识别的指令" << endl;
+		}
+		cout << endl;
+	}
+}
+
+//开始求解线性方程组
+void equation_start()
+{
+	int m, n;
+	cout << "请输入方程组增广矩阵的行数" << endl;
+	cin >> m;
+	cout << "请输入方程组增广矩阵的列数" << endl;
+	cin >> n;
+	cout << "请输入方程组的增广矩阵" << endl;
+	Equation e = scan_matrix(m, n);//读取并创建方程组e
+	cout << endl;
+	e.solve();//求解并打印结果
+	cout << endl;
+	while (true)//结束求解的相关操作
+	{
+		cout << "输入ok结束本次求解,输入printm打印变换出的行简化阶梯阵" << endl;
+		cout << "[输入指令]";
+		string str;
+		cin >> str;
+		if (str == "ok")
+		{
+			cout << "本次求解结束" << endl;
+			return;
+		}
+		else if (str == "printm")
+		{
+			cout << "行简化阶梯阵：" << endl;
+			e.print_matrix();
+			cout << "本次求解结束" << endl;
+			return;
+		}
+		else
+		{
+			cout << "无法识别的指令" << endl;
+		}
+	}
 }

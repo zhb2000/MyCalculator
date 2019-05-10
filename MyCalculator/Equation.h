@@ -47,6 +47,7 @@ struct Equation
 	//非齐次方程组求解，用ans存解向量组
 	//返回-1表示无解，返回0表示有唯一解，返回1表示有无穷多解
 	Status solve_inhomo(vector<elem> &ans_te, VectorGroup &ans_tong) const;
+	//求解并打印
 	void solve();
 	///----数据成员----
 
@@ -61,3 +62,7 @@ struct Equation
 
 //读入增广矩阵
 Equation scan_matrix(int m, int n);
+//进入求解线性方程组模式
+void equation_mode();
+//开始求解线性方程组
+void equation_start();

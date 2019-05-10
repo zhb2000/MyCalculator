@@ -158,12 +158,14 @@
     <ClInclude Include="BigNumber.h" />
     <ClInclude Include="Equation.h" />
     <ClInclude Include="Fraction.h" />
+    <ClInclude Include="LogicalExpression.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigNumber.cpp" />
     <ClCompile Include="Equatation.cpp" />
     <ClCompile Include="Fraction.cpp" />
+    <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

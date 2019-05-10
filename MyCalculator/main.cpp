@@ -2,6 +2,7 @@
 //
 
 #include "pch.h"
+#include<stdlib.h>
 #include "BigNumber.h"
 #include "Fraction.h"
 #include "Equation.h"
@@ -10,15 +11,9 @@ using namespace std;
 
 int main()
 {
-	/*cout << "输入增广矩阵的行数,列数" << endl;
-	int m, n;
-	cin >> m >> n;
-	Equation e = scan_matrix(m, n);
-	cout << endl;
-	e.solve();
-	cout << endl;
-	e.print_matrix();*/
-	Fraction f(0.33333);
-	cout << f;
+	//system("mode con cols=60 lines=20"); //cols为控制台的宽度，lines则代表控制台的高度。
+	system("color fc");
+	//equation_mode();
+	system("pause");
 	return 0;
 }
