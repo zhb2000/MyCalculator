@@ -435,8 +435,8 @@ void equation_mode()
 {
 	while (true)
 	{
-		cout << "输入start即可开始，输入quit退出求解线性方程组模式" << endl;
-		cout << "[输入指令]";
+		cout << "[指令列表]输入start即可开始，输入quit退出求解线性方程组模式，输入cls清屏" << endl;
+		cout << ">>>";
 		string str;
 		cin >> str;
 		if (str == "start")
@@ -446,12 +446,16 @@ void equation_mode()
 		}
 		else if (str == "quit")
 		{
-			cout << "已退出求解线性方程组模式" << endl << endl;
+			cout << "[系统提示]已退出求解线性方程组模式" << endl << endl;
 			return;
+		}
+		else if (str == "cls")
+		{
+			system("cls");
 		}
 		else
 		{
-			cout << "无法识别的指令" << endl;
+			cout << "[错误]无法识别的指令" << endl;
 		}
 		cout << endl;
 	}
@@ -472,25 +476,25 @@ void equation_start()
 	cout << endl;
 	while (true)//结束求解的相关操作
 	{
-		cout << "输入ok结束本次求解,输入printm打印变换出的行简化阶梯阵" << endl;
-		cout << "[输入指令]";
+		cout << "[指令列表]输入ok结束本次求解,输入printm打印变换出的行简化阶梯阵" << endl;
+		cout << ">>>";
 		string str;
 		cin >> str;
 		if (str == "ok")
 		{
-			cout << "本次求解结束" << endl;
+			cout << "[系统提示]本次求解结束" << endl;
 			return;
 		}
 		else if (str == "printm")
 		{
 			cout << "行简化阶梯阵：" << endl;
 			e.print_matrix();
-			cout << "本次求解结束" << endl;
+			cout << "[系统提示]本次求解结束" << endl;
 			return;
 		}
 		else
 		{
-			cout << "无法识别的指令" << endl;
+			cout << "[错误]无法识别的指令\n" << endl;
 		}
 	}
 }

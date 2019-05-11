@@ -6,13 +6,15 @@
 #include "BigNumber.h"
 #include "Fraction.h"
 #include "Equation.h"
+#include "Theme.h"
 
 using namespace std;
 
 int main()
 {
 	//system("mode con cols=60 lines=20"); //cols为控制台的宽度，lines则代表控制台的高度。
-	system("color fc");
+	system("color f5");
+	//theme_mode();
 	//equation_mode();
 	system("pause");
 	return 0;
