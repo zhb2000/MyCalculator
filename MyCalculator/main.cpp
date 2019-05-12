@@ -2,11 +2,11 @@
 //
 
 #include "pch.h"
-#include<stdlib.h>
 #include "BigNumber.h"
 #include "Fraction.h"
 #include "Equation.h"
 #include "Theme.h"
+#include "LogicalExpression.h"
 
 using namespace std;
 
@@ -16,6 +16,7 @@ int main()
 	system("color f5");
 	//theme_mode();
 	//equation_mode();
+	logical_expression_start();
 	system("pause");
 	return 0;
 }
