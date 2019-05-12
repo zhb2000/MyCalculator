@@ -8,6 +8,7 @@ void logical_expression_mode()
 {
 	while (true)
 	{
+		cout << "--------------------------------------------" << endl;
 		cout << "[指令列表]输入start即可开始，输入quit退出命题逻辑模式，输入cls清屏" << endl;
 		cout << ">>>";
 		string str;

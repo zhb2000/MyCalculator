@@ -36,6 +36,9 @@
     <ClInclude Include="BigNumberCalcu.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="OtherMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -60,6 +63,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="BigNumberCalcu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OtherMode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

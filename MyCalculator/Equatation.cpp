@@ -435,6 +435,7 @@ void equation_mode()
 {
 	while (true)
 	{
+		cout << "--------------------------------------------" << endl;
 		cout << "[指令列表]输入start即可开始，输入quit退出求解线性方程组模式，输入cls清屏" << endl;
 		cout << ">>>";
 		string str;
