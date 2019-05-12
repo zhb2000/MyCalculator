@@ -3,17 +3,47 @@
 #include "LogicalExpression.h"
 using namespace std;
 
-
+//命题逻辑模式
+void logical_expression_mode()
+{
+	while (true)
+	{
+		cout << "[指令列表]输入start即可开始，输入quit退出命题逻辑模式，输入cls清屏" << endl;
+		cout << ">>>";
+		string str;
+		cin >> str;
+		if (str == "start")
+		{
+			cout << endl;
+			logical_expression_start();
+		}
+		else if (str == "quit")
+		{
+			cout << "[系统提示]已退出命题逻辑模式" << endl << endl;
+			return;
+		}
+		else if (str == "cls")
+		{
+			system("cls");
+		}
+		else
+		{
+			cout << "[错误]无法识别的指令" << endl;
+		}
+		cout << endl;
+	}
+}
 
 //命题逻辑开始
 void logical_expression_start()
 {
-	
+	cout << "使用方法：\n'!'代表否定,'&'代表合取,'|'代表析取,'>'代表蕴含,'~'代表等值\n命题变元用英文字母表示\n\n";
+	cout << "请输入命题逻辑表达式：" << endl;
 	string infix;//中缀表达式
-	getline(cin, infix);
+	cin >> infix;
 	string rpolish;//后缀表达式
 	//第一次合法性校验
-	if (trans_to_rpolish(infix, rpolish) == 0)
+	if (trans_to_rpolish(infix, rpolish) == 0)//转换成后缀表达式
 	{
 		cout << "[错误]非法的表达式!\n\n";
 		return;
@@ -21,18 +51,24 @@ void logical_expression_start()
 	cout << endl;
 	map<char, bool> assignment;//指派
 	init_assignment(infix, assignment);//用表达式将assignment初始化
-	//第二次合法性校验
+	//第二次合法性校验（尝试求值）
 	bool result_no_use;//没用的结果
 	if (calcu_rpolish(rpolish, assignment, result_no_use) == 0)
 	{
 		cout << "[错误]非法的表达式!!\n\n";
 		return;
 	}
-	//真值表
-	TruthTable table;
+
+	TruthTable table;//真值表
 	table.create(assignment, rpolish);
-	table.print_table();
-	cout << rpolish << endl;
+	cout << "真值表：" << endl;
+	table.print_table();//打印真值表
+	cout << endl;
+	cout << "主合取范式：" << endl;
+	table.print_CCNF();//打印主合取范式
+	cout << "主析取范式：" << endl;
+	table.print_CDNF();//打主析取范式
+	cout << endl << "[系统提示]本次求解结束" << endl;
 }
 
 //判断是否是操作符
@@ -130,6 +166,8 @@ Status trans_to_rpolish(string infix, string &rpolish)
 	}//遍历中缀表达式结束
 	while (!opchar.empty())//若栈里还有运算符，依次弹出，加入后缀表达式
 	{
+		if (opchar.top() == '(')//表明左括号未配对，失败
+			return 0;
 		rpolish.push_back(opchar.top());
 		opchar.pop();
 	}
@@ -165,7 +203,7 @@ void TruthTable::print_table()
 	{
 		cout << it->first << " ";
 	}
-	cout << "Func" << endl;
+	cout << "func" << endl;
 	//打印表的本体
 	//一行一行地遍历真值表，vec_it指向TruthTableRow型的遍历
 	for (vector<TruthTableRow>::iterator vec_it = rows.begin(); vec_it != rows.end(); vec_it++)
@@ -275,10 +313,79 @@ bool calcu_two(bool left, bool right, char ch)
 //打印主合取范式
 void TruthTable::print_CCNF()
 {
-	
+	if (num_of_false == 0)
+	{
+		cout << "主合取范式不存在" << endl;
+		return;
+	}
+	int false_sum = 0;//记录当前是第几个成假指派
+	//一行一行地遍历真值表
+	for (vector<TruthTableRow>::iterator vec_it = rows.begin(); vec_it != rows.end(); vec_it++)
+	{
+		if (vec_it->func_result == false)
+		{
+			false_sum++;
+			cout << "(";
+			//遍历当前行的指派
+			for (map<char, bool>::iterator it = vec_it->assignment.begin(); it != vec_it->assignment.end(); it++)
+			{
+				if (it->second == false)//0对应原变量
+					cout << it->first;
+				else//1对应反变量
+					cout << "!" << it->first;
+				map<char, bool>::iterator last = vec_it->assignment.end();
+				last--;//让迭代器last指向assignment中最后一个元素
+				if (it != last)
+				{
+					cout << "|";
+				}
+			}
+			cout << ")";
+			if (false_sum < num_of_false)
+				cout << "&";
+			else
+				break;
+		}
+	}
+	cout << endl;
 }
 
 //打印主析取范式
 void TruthTable::print_CDNF()
 {
+	if (num_of_true == 0)
+	{
+		cout << "主析取范式不存在" << endl;
+		return;
+	}
+	int true_sum = 0;//记录当前是第几个成真指派
+	//一行一行地遍历真值表
+	for (vector<TruthTableRow>::iterator vec_it = rows.begin(); vec_it != rows.end(); vec_it++)
+	{
+		if (vec_it->func_result == true)
+		{
+			true_sum++;
+			cout << "(";
+			//遍历当前行的指派
+			for (map<char, bool>::iterator it = vec_it->assignment.begin(); it != vec_it->assignment.end(); it++)
+			{
+				if (it->second == true)//1对应原变量
+					cout << it->first;
+				else//0对应反变量
+					cout << "!" << it->first;
+				map<char, bool>::iterator last = vec_it->assignment.end();
+				last--;//让迭代器last指向assignment中最后一个元素
+				if (it != last)
+				{
+					cout << "&";
+				}
+			}
+			cout << ")";
+			if (true_sum < num_of_true)
+				cout << "|";
+			else
+				break;
+		}
+	}
+	cout << endl;
 }

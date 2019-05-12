@@ -1,4 +1,4 @@
-//命题逻辑 by 朱华彬
+//命题逻辑头文件 by 朱华彬
 #pragma once
 #include <iostream>
 #include <stack>
@@ -19,8 +19,8 @@ static map<char, int> logical_priority = { {'~', 1},{'>', 2},{'|',3},{'&',4},{'!
 //真值表的一行
 struct TruthTableRow
 {
-	map<char, bool> assignment;
-	bool func_result;
+	map<char, bool> assignment;//对每个变元的具体指派
+	bool func_result;//该行的结果
 };
 //真值表
 struct TruthTable
@@ -50,6 +50,9 @@ struct TruthTable
 	int num_of_false;//结果为假的行数
 };
 
+//命题逻辑模式
+void logical_expression_mode();
+//命题逻辑开始
 void logical_expression_start();
 
 //判断是否是操作符

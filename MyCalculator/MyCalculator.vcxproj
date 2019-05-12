@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BigNumber.h" />
+    <ClInclude Include="BigNumberCalcu.h" />
     <ClInclude Include="Equation.h" />
     <ClInclude Include="Fraction.h" />
     <ClInclude Include="LogicalExpression.h" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigNumber.cpp" />
+    <ClCompile Include="BigNumberCalcu.cpp" />
     <ClCompile Include="Equatation.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="LogicalExpression.cpp" />

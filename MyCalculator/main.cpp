@@ -16,7 +16,7 @@ int main()
 	system("color f5");
 	//theme_mode();
 	//equation_mode();
-	logical_expression_start();
+	logical_expression_mode();
 	system("pause");
 	return 0;
 }

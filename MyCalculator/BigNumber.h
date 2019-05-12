@@ -1,5 +1,5 @@
 #pragma once
-//大数
+//大数 by 朱华彬
 #include <iostream>
 #include <vector>
 #include <string>
@@ -130,4 +130,58 @@ private:
 	char pos;//'+'表示整数，'-'表示负数，'0'表示0
 };
 
+//返回两数之商，precision是保留的小数位数
 BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision = PRECISION);
+//返回绝对值
+BigNumber abs(const BigNumber &num);
+//比较两个数的绝对值，num1大返回1，num2大返回-1，相等返回0
+int cmp_abs(const BigNumber &num1, const BigNumber &num2);
+//返回两数绝对值之和
+BigNumber add_abs(const BigNumber &num1, const BigNumber &num2);
+//返回两数绝对值之差（结果非负）
+BigNumber minus_abs(const BigNumber &num1, const BigNumber &num2);
+//返回两数的整除
+BigNumber divide_exactly(const BigNumber &num1, const BigNumber &num2);
+//返回两数的取余
+BigNumber rem_num(const BigNumber &num1, const BigNumber &num2);
+//返回两数之和
+BigNumber add_num(const BigNumber &num1, const BigNumber &num2);
+//返回两数之差
+BigNumber minus_num(const BigNumber &num1, const BigNumber &num2);
+//返回两数之积
+BigNumber multiply_num(const BigNumber &num1, const BigNumber &num2);
+//返回数的阶乘
+BigNumber factorial_num(const BigNumber &num);
+//返回数的整数次幂，base是底数，index是指数
+//index必须为整数,且index会被转化成long long
+BigNumber pow_int_index(const BigNumber &base, const BigNumber &index);
+//返回数的整数次开根
+//degree必须为整数,且degree会被转化成int
+BigNumber nth_root_int(const BigNumber &radicand, const BigNumber &degree);
+
+//运算符重载：输出流
+ostream& operator<< (ostream &out, const BigNumber &num);
+//运算符重载：输入流
+istream& operator>> (istream &in, BigNumber &num);
+//运算符重载：判等==
+bool operator== (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：不等于!=
+bool operator!= (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：大于>
+bool operator> (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：小于<
+bool operator< (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：大于等于>=
+bool operator>= (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：小于等于<=
+bool operator<= (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：相加+
+BigNumber operator+ (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：相减-
+BigNumber operator- (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：相乘*(保留PRECISION位小数)
+BigNumber operator* (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：相除/(保留PRECISION位小数)
+BigNumber operator/ (const BigNumber &num1, const BigNumber &num2);
+//运算符重载：取余%
+BigNumber operator% (const BigNumber &num1, const BigNumber &num2);

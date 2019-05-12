@@ -1,8 +1,8 @@
 #pragma once
-//分数
+//分数类头文件 by 朱华彬
 #include <iostream>
 #include <cmath>
-#include <string>//怎么没有也行？
+#include <string>
 #include <iterator>
 #include <iomanip>
 #include <sstream>
@@ -66,3 +66,22 @@ private:
 int gcd(int a, int b);
 //返回最小公倍数，要保证 a、b都为正
 int lcm(int a, int b);
+
+Fraction add_fract(Fraction fract1, Fraction fract2);
+Fraction minus_fract(Fraction fract1, Fraction fract2);
+Fraction multiply_fract(Fraction fract1, Fraction fract2);
+Fraction divide_fract(Fraction fract1, Fraction fract2);
+
+ostream& operator<< (ostream &out, const Fraction &num);
+istream& operator>> (istream &in, Fraction &num);
+Fraction operator+ (Fraction fract1, Fraction fract2);
+Fraction operator- (Fraction fract1, Fraction fract2);
+Fraction operator* (Fraction fract1, Fraction fract2);
+Fraction operator/ (Fraction fract1, Fraction fract2);
+
+bool operator== (const Fraction &fract1, const Fraction &fract2);
+bool operator!= (const Fraction &fract1, const Fraction &fract2);
+bool operator> (const Fraction &fract1, const Fraction &fract2);
+bool operator>= (const Fraction &fract1, const Fraction &fract2);
+bool operator< (const Fraction &fract1, const Fraction &fract2);
+bool operator<= (const Fraction &fract1, const Fraction &fract2);

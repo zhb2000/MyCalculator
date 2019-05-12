@@ -1,4 +1,4 @@
-//线性方程组
+//线性方程组 by 朱华彬
 #include "pch.h"
 #include "Fraction.h"
 #include "Equation.h"
@@ -465,11 +465,9 @@ void equation_mode()
 void equation_start()
 {
 	int m, n;
-	cout << "请输入方程组增广矩阵的行数" << endl;
-	cin >> m;
-	cout << "请输入方程组增广矩阵的列数" << endl;
-	cin >> n;
-	cout << "请输入方程组的增广矩阵" << endl;
+	cout << "请输入方程组增广矩阵的行数、列数：" << endl;
+	cin >> m >> n;
+	cout << "请输入方程组的增广矩阵：" << endl;
 	Equation e = scan_matrix(m, n);//读取并创建方程组e
 	cout << endl;
 	e.solve();//求解并打印结果

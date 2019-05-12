@@ -1,3 +1,4 @@
+//大数运算的实现 by 朱华彬
 #include "pch.h"
 #include "BigNumber.h"
 
@@ -308,7 +309,7 @@ long double BigNumber::get_real() const
 		return 0;
 	else
 	{
-		long double result = abs(this->get_int());
+		long double result = (long double)abs(this->get_int());//之前有警告，强制转换
 		long double base = 0.1;
 		for (int i = 0; i < dec_len; i++)
 		{
@@ -718,7 +719,7 @@ BigNumber nth_root_int(const BigNumber & radicand, const BigNumber & degree)
 	BigNumber small(1);
 	small.move_dot(0, 7);//设成10会变慢？2开1000次方
 	BigNumber radicand2 = radicand;//用于运算的临时变量
-	int degree2 = degree.get_int();//用于运算的临时变量
+	int degree2 = (int)degree.get_int();//用于运算的临时变量，有警告，long long强制转换成int
 	BigNumber x0, x1;
 	x0 = radicand2 / 2;//取radicand2 / 2作为radicand2的初值
 	x1 = x0 - x0 * (1 - radicand2 * pow_int_index(x0, -degree2)) / degree2;
