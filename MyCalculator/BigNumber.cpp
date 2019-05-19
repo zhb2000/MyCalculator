@@ -651,6 +651,115 @@ BigNumber multiply_num(const BigNumber & num1, const BigNumber & num2)
 	}//else
 }
 
+
+BigNumber multiply_num_2(const BigNumber & num1, const BigNumber & num2)
+{
+	BigNumber num11 = num1;//用于运算的临时变量
+	BigNumber num22 = num2;//用于运算的临时变量
+	//小数点右移变成整数
+	num11.move_dot(1, num11.dec_len);
+	num22.move_dot(1, num22.dec_len);
+	if (num11 == 0 || num22 == 0)//其中一个乘数为0
+		return BigNumber(0);
+	else //一般情况
+	{
+		/*
+		//通过补0把两个数变成一样长
+		//考虑到0的情况，因此用size()来处理长度
+		int max_int_len = max(num11.integer.size(), num22.integer.size());//整数应当补到这么长
+		num11.integer.insert(num11.integer.end(), max_int_len - num11.integer.size(), 0);
+		num22.integer.insert(num22.integer.end(), max_int_len - num22.integer.size(), 0);
+		if (num11.integer.size() % 2!=0)//奇数位，补1个0变偶数位
+		{
+			num11.integer.insert(num11.integer.end(), 0);
+			num22.integer.insert(num22.integer.end(), 0);
+		}
+		*/
+		BigNumber result = multiply_num_2_recursive(num11, num22);
+		result.clean_zero();//清除0，计算长度
+		result.move_dot(0, num1.dec_len + num2.dec_len);//小数点左移回去
+		//确定符号
+		if (num11.pos != num22.pos)
+			result.pos = '-';
+		else
+			result.pos = '+';
+		return result;
+	}//else
+}
+//递归
+BigNumber multiply_num_2_recursive(BigNumber num1, BigNumber num2)
+{
+	if (num1.integer.size() == 1 && num2.integer.size() == 1)
+	{
+		return BigNumber(num1.integer[0] * num2.integer[0]);
+	}
+	else
+	{
+		if (num1.integer.size() != num2.integer.size())
+		{
+			//通过补0把两个数变成一样长
+			//考虑到0的情况，因此用size()来处理长度
+			int max_int_len = max(num1.integer.size(), num2.integer.size());//整数应当补到这么长
+			num1.integer.insert(num1.integer.end(), max_int_len - num1.integer.size(), 0);
+			num2.integer.insert(num2.integer.end(), max_int_len - num2.integer.size(), 0);
+		}
+		if (num1.integer.size() % 2 != 0)//奇数位，补1个0变偶数位
+		{
+			num1.integer.insert(num1.integer.end(), 0);
+			num2.integer.insert(num2.integer.end(), 0);
+		}
+		
+
+		int len = num1.integer.size();//总长度
+		int half_len = len / 2;
+		BigNumber num_a = num1.get_half(half_len, 1);
+		BigNumber num_b = num1.get_half(half_len, 0);
+		BigNumber num_c = num2.get_half(half_len, 1);
+		BigNumber num_d = num2.get_half(half_len, 0);
+		BigNumber temp1 = multiply_num_2_recursive(num_a, num_c);
+		BigNumber temp2 = multiply_num_2_recursive(num_b, num_d);
+		BigNumber temp3 = multiply_num_2_recursive(add_abs(num_a, num_b), add_abs(num_c, num_d));
+		/*
+		num_a.clean_zero();
+		num_b.clean_zero();
+		num_c.clean_zero();
+		num_d.clean_zero();
+		*/
+		//BigNumber temp3 = multiply_num_2_recursive(num_a + num_b, num_c + num_d);
+		BigNumber temp4 = minus_abs(minus_abs(temp3, temp2), temp1);
+		
+		/*temp3.clean_zero();
+		temp2.clean_zero();
+		temp1.clean_zero();
+		BigNumber temp4 = temp3 - temp2 - temp1;*/
+		
+		temp1.move_dot(1, len);
+		temp4.move_dot(1, half_len);
+		//temp4.clean_zero();
+		BigNumber result = add_abs(add_abs(temp1, temp4), temp2);
+		//BigNumber result = temp1 + temp4 + temp2;
+		return result;
+	}
+}
+
+//取一半，保证符号为正
+//0代表取低位，1代表取高位
+BigNumber BigNumber::get_half(int length, bool which) const
+{
+	BigNumber num(0);
+	num.integer.clear();
+	if (!which)//取低位
+	{
+		num.integer.insert(num.integer.end(), this->integer.begin(), this->integer.begin() + length);
+	}
+	else//取高位
+	{
+		num.integer.insert(num.integer.end(), this->integer.end() - length, this->integer.end());
+	}
+	num.pos = '+';//符号设为正数
+	return num;
+}
+
 //返回两数之商，precision是保留的小数位数
 BigNumber divide_num(const BigNumber & num1, const BigNumber & num2, int precision)
 {
@@ -870,6 +979,7 @@ BigNumber operator-(const BigNumber & num1, const BigNumber & num2)
 BigNumber operator*(const BigNumber & num1, const BigNumber & num2)
 {
 	BigNumber result = multiply_num(num1, num2);
+	//BigNumber result = multiply_num_2(num1, num2);
 	result.accuracy(PRECISION);
 	return result;
 }

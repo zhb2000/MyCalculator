@@ -45,6 +45,9 @@ public:
 	long long  get_int() const;
 	//返回转换成的实数
 	long double get_real() const;
+	//取一半
+	//0代表取低位，1代表取高位
+	BigNumber get_half(int length, bool which) const;
 
 	///----友元函数----
 
@@ -66,6 +69,9 @@ public:
 	friend BigNumber minus_num(const BigNumber &num1, const BigNumber &num2);
 	//返回两数之积
 	friend BigNumber multiply_num(const BigNumber &num1, const BigNumber &num2);
+	//分治法做乘法
+	friend BigNumber multiply_num_2(const BigNumber &num1, const BigNumber &num2);
+	friend BigNumber multiply_num_2_recursive(BigNumber num1, BigNumber num2);
 	//返回两数之商，precision是保留的小数位数
 	friend BigNumber divide_num(const BigNumber &num1, const BigNumber &num2, int precision);
 	//返回数的阶乘

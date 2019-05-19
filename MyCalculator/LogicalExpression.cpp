@@ -142,8 +142,13 @@ Status trans_to_rpolish(string infix, string &rpolish)
 					opchar.push(*it);
 				else if (opchar.top() == '!')//栈顶是前置运算符
 				{
-					rpolish.push_back(opchar.top());
-					opchar.pop();
+					do
+					{
+						rpolish.push_back(opchar.top());
+						opchar.pop();
+						if (opchar.empty())
+							break;
+					} while (opchar.top() == '!');
 					opchar.push(*it);
 				}
 				else if (logical_priority[(*it)] >= logical_priority[(opchar.top())])//当前优先级>=栈顶优先级
