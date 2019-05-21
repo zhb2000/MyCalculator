@@ -1,6 +1,7 @@
 //分数类的实现 by 朱华彬
 #include "pch.h"
 #include "Fraction.h"
+using namespace std;
 
 ///----构造函数----
 
@@ -88,7 +89,7 @@ Fraction::Fraction(string s)
 			num += s[i] - '0';//加上当前数字
 		}
 		i++;
-		Fraction fract = 0;//分母的数字
+		Fraction fract = 0;//小数的数字
 		Fraction base(1, 10);
 		for (; i < s.size(); i++)//计算小数的数字
 		{

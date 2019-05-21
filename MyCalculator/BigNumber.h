@@ -8,7 +8,7 @@
 #include <cmath>
 #include <sstream>
 #include <iomanip>
-using namespace std;
+
 
 static const int PRECISION = 10;//保留的小数位
 //static const int BASE = 100000000;
@@ -26,7 +26,7 @@ public:
 	//参数为double的构造函数
 	BigNumber(double num);
 	//参数为string的构造函数
-	BigNumber(const string &num);
+	BigNumber(const std::string &num);
 	//参数为char *的构造函数
 	BigNumber(const char *num);
 
@@ -86,9 +86,9 @@ public:
 	///----运算符重载----
 
 	//运算符重载：输出流
-	friend ostream& operator<< (ostream &out, const BigNumber &num);
+	friend std::ostream& operator<< (std::ostream &out, const BigNumber &num);
 	//运算符重载：输入流
-	friend istream& operator>> (istream &in, BigNumber &num);
+	friend std::istream& operator>> (std::istream &in, BigNumber &num);
 	//运算符重载：判等==
 	friend bool operator== (const BigNumber &num1, const BigNumber &num2);
 	//运算符重载：不等于!=
@@ -129,8 +129,8 @@ public:
 	BigNumber& operator%= (const BigNumber &num);
 
 private:
-	vector<int> integer;//整数部分，逆序
-	vector<int> decimal;//小数部分，顺序
+	std::vector<int> integer;//整数部分，逆序
+	std::vector<int> decimal;//小数部分，顺序
 	int int_len;//整数位数
 	int dec_len;//小数位数
 	char pos;//'+'表示整数，'-'表示负数，'0'表示0
@@ -166,9 +166,9 @@ BigNumber pow_int_index(const BigNumber &base, const BigNumber &index);
 BigNumber nth_root_int(const BigNumber &radicand, const BigNumber &degree);
 
 //运算符重载：输出流
-ostream& operator<< (ostream &out, const BigNumber &num);
+std::ostream& operator<< (std::ostream &out, const BigNumber &num);
 //运算符重载：输入流
-istream& operator>> (istream &in, BigNumber &num);
+std::istream& operator>> (std::istream &in, BigNumber &num);
 //运算符重载：判等==
 bool operator== (const BigNumber &num1, const BigNumber &num2);
 //运算符重载：不等于!=

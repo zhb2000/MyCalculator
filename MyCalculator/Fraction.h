@@ -6,7 +6,7 @@
 #include <iterator>
 #include <iomanip>
 #include <sstream>
-using namespace std;
+//using namespace std;
 
 class Fraction
 {
@@ -16,7 +16,7 @@ public:
 	Fraction();
 	Fraction(int num);
 	Fraction(int a, int b);
-	Fraction(string s);
+	Fraction(std::string s);
 	Fraction(const char *char_s);
 	Fraction(double num);
 
@@ -34,8 +34,8 @@ public:
 
 	///----‘ÀÀ„∑˚÷ÿ‘ÿ----
 
-	friend ostream& operator<< (ostream &out, const Fraction &num);
-	friend istream& operator>> (istream &in, Fraction &num);
+	friend std::ostream& operator<< (std::ostream &out, const Fraction &num);
+	friend std::istream& operator>> (std::istream &in, Fraction &num);
 	friend Fraction operator+ (Fraction fract1, Fraction fract2);
 	friend Fraction operator- (Fraction fract1, Fraction fract2);
 	friend Fraction operator* (Fraction fract1, Fraction fract2);
@@ -72,8 +72,8 @@ Fraction minus_fract(Fraction fract1, Fraction fract2);
 Fraction multiply_fract(Fraction fract1, Fraction fract2);
 Fraction divide_fract(Fraction fract1, Fraction fract2);
 
-ostream& operator<< (ostream &out, const Fraction &num);
-istream& operator>> (istream &in, Fraction &num);
+std::ostream& operator<< (std::ostream &out, const Fraction &num);
+std::istream& operator>> (std::istream &in, Fraction &num);
 Fraction operator+ (Fraction fract1, Fraction fract2);
 Fraction operator- (Fraction fract1, Fraction fract2);
 Fraction operator* (Fraction fract1, Fraction fract2);

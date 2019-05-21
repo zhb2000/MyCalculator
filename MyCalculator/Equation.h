@@ -7,7 +7,7 @@
 
 typedef Fraction elem;//矩阵的元素
 typedef int Status;//返回状态
-typedef vector<vector<elem>> VectorGroup;//向量组
+typedef std::vector<std::vector<elem>> VectorGroup;//向量组
 enum EquationType
 {	homo, //齐次
 	inhomo//非齐次
@@ -46,13 +46,13 @@ struct Equation
 	Status solve_homo(VectorGroup &ans) const;
 	//非齐次方程组求解，用ans存解向量组
 	//返回-1表示无解，返回0表示有唯一解，返回1表示有无穷多解
-	Status solve_inhomo(vector<elem> &ans_te, VectorGroup &ans_tong) const;
+	Status solve_inhomo(std::vector<elem> &ans_te, VectorGroup &ans_tong) const;
 	//求解并打印
 	void solve();
 	///----数据成员----
 
 	//增广矩阵,动态二维数组
-	vector<vector<elem>> vec;
+	std::vector<std::vector<elem>> vec;
 	int rows;//增广矩阵的行数
 	int cols;//增广矩阵的列数
 	EquationType type;//方程组的类型

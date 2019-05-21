@@ -1,6 +1,7 @@
 //大数运算的实现 by 朱华彬
 #include "pch.h"
 #include "BigNumber.h"
+using namespace std;
 
 ///----构造函数----
 

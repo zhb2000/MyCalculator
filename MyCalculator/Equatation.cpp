@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "Fraction.h"
 #include "Equation.h"
+using namespace std;
 
 //构造函数,创建m行n列的二维vector
 Equation::Equation(int m, int n)
