@@ -167,7 +167,7 @@
   <ItemGroup>
     <ClCompile Include="BigNumber.cpp" />
     <ClCompile Include="BigNumberCalcu.cpp" />
-    <ClCompile Include="Equatation.cpp" />
+    <ClCompile Include="Equation.cpp" />
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="main.cpp" />
