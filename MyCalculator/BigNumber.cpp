@@ -1,6 +1,13 @@
-//大数运算的实现 by 朱华彬
+//大数运算的实现 
+//by 朱华彬
 #include "pch.h"
 #include "BigNumber.h"
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <cmath>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 
 ///----构造函数----

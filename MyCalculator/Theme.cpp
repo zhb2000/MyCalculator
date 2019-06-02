@@ -1,6 +1,8 @@
 //切换主题的实现 by 朱华彬
 #include "pch.h"
 #include "Theme.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 void theme_mode()

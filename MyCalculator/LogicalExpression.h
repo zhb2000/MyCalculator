@@ -1,14 +1,10 @@
-//命题逻辑头文件 by 朱华彬
+//命题逻辑头文件 
+//by 朱华彬
 #pragma once
-#include <iostream>
-#include <stack>
+
 #include <string>
 #include <map>
 #include <vector>
-#include <iterator>
-#include <queue>
-#include <cmath>
-//using namespace std;
 
 //函数返回状态代码
 typedef int Status;

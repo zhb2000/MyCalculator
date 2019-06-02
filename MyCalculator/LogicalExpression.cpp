@@ -1,6 +1,12 @@
-//命题逻辑 by 朱华彬
+//命题逻辑 
+//by 朱华彬
 #include "pch.h"
 #include "LogicalExpression.h"
+#include <iostream>
+#include <stack>
+#include <iterator>
+#include <queue>
+#include <cmath>
 using namespace std;
 
 //命题逻辑模式

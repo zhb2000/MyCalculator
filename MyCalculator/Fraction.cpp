@@ -1,6 +1,12 @@
-//分数类的实现 by 朱华彬
+//分数类的实现 
+//by 朱华彬
 #include "pch.h"
 #include "Fraction.h"
+#include <iterator>
+#include <iomanip>
+#include <sstream>
+#include <iostream>
+#include <cmath>
 using namespace std;
 
 ///----构造函数----

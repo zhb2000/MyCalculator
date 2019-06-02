@@ -1,13 +1,8 @@
 #pragma once
-//大数 by 朱华彬
-#include <iostream>
+//大数 头文件
+//by 朱华彬
 #include <vector>
 #include <string>
-#include <iterator>
-#include <algorithm>
-#include <cmath>
-#include <sstream>
-#include <iomanip>
 
 
 static const int PRECISION = 10;//保留的小数位

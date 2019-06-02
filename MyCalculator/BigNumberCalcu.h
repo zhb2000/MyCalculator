@@ -1,8 +1,6 @@
 #pragma once
-//简单的大数运算 by 朱华彬
-#include <iostream>
-#include <string>
-#include <ctime>
+//大数运算 头文件
+//by 朱华彬
 #include "BigNumber.h"
 
 void BigNumCalcu_mode();

@@ -1,5 +1,13 @@
 #include "pch.h"
 #include "OtherMode.h"
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include "BigNumberCalcu.h"
+#include "Equation.h"
+#include "LogicalExpression.h"
+#include "Theme.h"
+#include "Matrix.h"
 using namespace std;
 
 //模式切换
@@ -23,7 +31,7 @@ void switch_mode()
 		else if (str == "3")
 			logical_expression_mode();
 		else if (str == "4")
-			matrix_mode();
+			calcu_matrix();
 		else if (str == "5")
 			cout << "进制转换未完成" << endl;
 		else if (str == "6")
@@ -43,9 +51,4 @@ void about_mode()
 {
 	cout << "--------------------------------------------" << endl;
 	cout << "小组成员：\n朱华彬 马骁 李政民\n\n";
-}
-
-void matrix_mode()
-{
-	cout << "简单的矩阵运算，尚未完工" << endl;
 }

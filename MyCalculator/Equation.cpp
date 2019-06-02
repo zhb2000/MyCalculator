@@ -1,7 +1,12 @@
-//线性方程组 by 朱华彬
+//线性方程组 
+//by 朱华彬
 #include "pch.h"
 #include "Fraction.h"
 #include "Equation.h"
+#include <map>
+#include <algorithm>
+#include <iostream>
+
 using namespace std;
 
 //构造函数,创建m行n列的二维vector

@@ -39,6 +39,9 @@
     <ClInclude Include="OtherMode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -66,6 +69,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Equation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

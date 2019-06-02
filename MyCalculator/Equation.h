@@ -1,9 +1,8 @@
 #pragma once
-//线性方程组 by 朱华彬
+//线性方程组 头文件
+//by 朱华彬
 #include <vector>
 #include "Fraction.h"
-#include <algorithm>
-#include <map>
 
 typedef Fraction elem;//矩阵的元素
 typedef int Status;//返回状态

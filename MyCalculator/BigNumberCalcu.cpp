@@ -1,6 +1,10 @@
-//简单的大数运算 by 朱华彬
+//调用大数运算 
+//by 朱华彬
 #include "pch.h"
 #include "BigNumberCalcu.h"
+#include <iostream>
+#include <string>
+#include <ctime>
 using namespace std;
 
 void BigNumCalcu_mode()

@@ -160,6 +160,7 @@
     <ClInclude Include="Equation.h" />
     <ClInclude Include="Fraction.h" />
     <ClInclude Include="LogicalExpression.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="OtherMode.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Theme.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Fraction.cpp" />
     <ClCompile Include="LogicalExpression.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="OtherMode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -1,12 +1,7 @@
 #pragma once
-//分数类头文件 by 朱华彬
-#include <iostream>
-#include <cmath>
+//分数类 头文件 
+//by 朱华彬
 #include <string>
-#include <iterator>
-#include <iomanip>
-#include <sstream>
-//using namespace std;
 
 class Fraction
 {
