@@ -5,7 +5,8 @@
 #include "Fraction.h"
 typedef Fraction MElem;
 
-class Tableau {	//这里定义了类：数组 数组是类矩阵的子类
+//这里定义了类：数组 数组是类矩阵的子类
+class Tableau {
 public:
 	Tableau(int newa, int newb);//声明构造函数
 	~Tableau();					  //声明析构函数					  
@@ -13,8 +14,8 @@ public:
 
 	int setTableau();//声明初始化矩阵中的元素的函数
 	void getTableau() const;//声明以矩阵形式输出矩阵的函数
-	int geta() const;
-	int getb() const;
+	int geta() const;//返回矩阵的行数
+	int getb() const;//返回矩阵的列数
 	Tableau& operator= (const Tableau &t);//重载=运算符，实现深复制
 
 	//把下标第i行加到第j行
