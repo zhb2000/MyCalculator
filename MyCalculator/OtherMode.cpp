@@ -8,6 +8,7 @@
 #include "LogicalExpression.h"
 #include "Theme.h"
 #include "Matrix.h"
+#include "NumberTrans.h"
 using namespace std;
 
 //模式切换
@@ -33,7 +34,7 @@ void switch_mode()
 		else if (str == "4")
 			calcu_matrix();
 		else if (str == "5")
-			cout << "进制转换未完成" << endl;
+			my_trans_func();
 		else if (str == "6")
 			theme_mode();
 		else if (str == "7")
