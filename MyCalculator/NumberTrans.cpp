@@ -935,6 +935,7 @@ void my_trans_func()
 	while (true)
 	{
 		string s;
+		cout << "--------------------------------------------" << endl;
 		cout << "请选择需要的功能" << endl;
 		cout << "1.进制转换 " << "2.10进制数转BCD码 " << "3.BCD码转十进制数" << endl;
 		cout << "cls - 清屏 quit - 退出进制和编码转换模式" << endl;

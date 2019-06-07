@@ -474,7 +474,7 @@ void equation_start()
 	int m, n;
 	cout << "请输入方程组增广矩阵的行数、列数：" << endl;
 	cin >> m >> n;
-	cout << "请输入方程组的增广矩阵：" << endl;
+	cout << "请输入方程组的增广矩阵：\n（注意是增广矩阵，不是系数矩阵）" << endl;
 	Equation e = scan_matrix(m, n);//读取并创建方程组e
 	cout << endl;
 	e.solve();//求解并打印结果
